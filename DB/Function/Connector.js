@@ -9,9 +9,11 @@ const username = encodeURIComponent(process.env.MONGO_USERNAME);
 const password = encodeURIComponent(process.env.MONGO_PASSWORD);
 const url = `${process.env.MONGO_URL_PREFIX}${username}:${password}${process.env.MONGO_URL_SUFFIX}`;
 
+const dbName = `Expense_${env}`;
+
 export const connectDB = async () => {
     try {
-        await mongoose.connect(url);
+        await mongoose.connect(`${url}/${dbName}`);
         return mongoose.connection;
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
