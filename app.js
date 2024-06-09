@@ -2,7 +2,7 @@ import express from "express";
 import fs from "fs";
 import dotenv from "dotenv";
 import { connectDB, disconnectDB } from "./DB/Function/Connector.js";
-import userRouter from "./routers/Users/users.js";
+import { Router } from "./routers/index.js";
 
 const env = process.env.NODE_ENV || "development";
 const envFile = `.env.${env}`;
@@ -24,7 +24,8 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use('/api/user', userRouter)
+app.use("/api/user", Router.User);
+app.use("/api/auth", Router.Auth);
 
 connectDB()
     .then((db) => {
