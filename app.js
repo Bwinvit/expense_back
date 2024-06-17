@@ -3,6 +3,7 @@ import fs from "fs";
 import dotenv from "dotenv";
 import { connectDB, disconnectDB } from "./DB/Function/Connector.js";
 import { Router } from "./routers/index.js";
+import cors from 'cors';
 
 const env = process.env.NODE_ENV || "development";
 const envFile = `.env.${env}`;
@@ -16,6 +17,7 @@ if (fs.existsSync(envFile)) {
 
 const app = express();
 const port = process.env.PORT;
+app.use(cors());
 
 app.use((req, res, next) => {
     console.log(`🥊🥊🥊${req.method} request for '${req.url}'`);
