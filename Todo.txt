@@ -1,0 +1,25 @@
+- User Profile Management // Done
+Implement endpoints to manage user profiles, allowing users to view and update their profile information.
+
+- Category => CRUD relate to transaction type
+
+- Budget Management
+Implement features to manage budgets, allowing users to set budgets for different categories and track their spending against these budgets.
+
+- Reporting and Analytics
+Develop reporting and analytics features to provide users with insights into their spending habits, income, and expenses.
+
+- Notification System
+Set up a notification system to alert users about important events, such as exceeding a budget, upcoming bills, or transactions.
+
+- Security Enhancements
+Implement additional security measures, such as:
+
+Rate limiting to prevent abuse.
+Input validation and sanitization to prevent SQL injection and XSS attacks.
+Role-based access control (RBAC) for different levels of user permissions.
+6. Testing
+Write unit tests and integration tests to ensure the stability and reliability of your application.
+
+7. Deployment
+Prepare your application for deployment, including setting up environment variables, configuring a production database, and deploying to a cloud provider.
