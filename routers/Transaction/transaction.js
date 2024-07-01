@@ -11,5 +11,7 @@ router.get("/", TransactionAction.getTransactions);
 router.get("/:id", TransactionAction.getTransaction);
 router.put("/:id", TransactionAction.updateTransaction);
 router.delete("/:id", TransactionAction.deleteTransaction);
+router.delete("/", TransactionAction.clearTransactionsByUserId);
+router.delete("/all", TransactionAction.clearAllTransactions);
 
 export default router;

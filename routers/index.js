@@ -4,6 +4,7 @@ import NAQ from "./NAQ/NAQ.js";
 import Transaction from "./Transaction/transaction.js";
 import Category from "./Category/Category.js";
 import TransactionType from "./TransactionType/TransactionType.js";
+import Home from "./Home/Home.js";
 
 export const Router = {
   User,
@@ -12,4 +13,5 @@ export const Router = {
   Transaction,
   Category,
   TransactionType,
+  Home,
 };

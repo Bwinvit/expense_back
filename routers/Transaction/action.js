@@ -1,10 +1,9 @@
 import Transaction from "../../DB/Model/Transaction.js";
 import Category from "../../DB/Model/Category.js";
-import TransactionType from "../../DB/Model/TransactionType.js";
 
 const createTransaction = async (req, res) => {
   try {
-    const { categoryId, amount, description } = req.body;
+    const { categoryId, amount, description, date } = req.body; // Include date in the destructuring
     const userId = req.userId;
 
     const category = await Category.findOne({
@@ -59,7 +58,7 @@ const getTransaction = async (req, res) => {
 const updateTransaction = async (req, res) => {
   try {
     const { id } = req.params;
-    const { categoryId, amount, description } = req.body;
+    const { categoryId, amount, description, date } = req.body;
 
     const category = await Category.findOne({
       _id: categoryId,
@@ -70,7 +69,7 @@ const updateTransaction = async (req, res) => {
 
     const transaction = await Transaction.findOneAndUpdate(
       { _id: id, userId: req.userId },
-      { category: categoryId, type: category.type, amount, description },
+      { category: categoryId, type: category.type, amount, description, date },
       { new: true }
     )
       .populate("category", "name")
@@ -101,10 +100,41 @@ const deleteTransaction = async (req, res) => {
   }
 };
 
+const clearTransactionsByUserId = async (req, res) => {
+  try {
+    const result = await Transaction.deleteMany({ userId: req.userId });
+    res
+      .status(200)
+      .json({
+        message: "Transactions cleared successfully",
+        deletedCount: result.deletedCount,
+      });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const clearAllTransactions = async (req, res) => {
+  try {
+    const result = await Transaction.deleteMany({});
+    res
+      .status(200)
+      .json({
+        message: "All transactions cleared successfully",
+        deletedCount: result.deletedCount,
+      });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export const TransactionAction = {
   createTransaction,
   getTransactions,
   getTransaction,
   updateTransaction,
   deleteTransaction,
+  //Admin route
+  clearTransactionsByUserId,
+  clearAllTransactions,
 };

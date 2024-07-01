@@ -35,12 +35,11 @@ app.use("/api/naq", Router.NAQ);
 app.use("/api/transaction", Router.Transaction);
 app.use("/api/category", Router.Category);
 app.use("/api/transaction-type", Router.TransactionType);
+app.use("/api/home", Router.Home);
 
 connectDB()
   .then((db) => {
     console.log("🥭🥭🥭Connected to MongoDB🥭🥭🥭");
-
-    // seedCategories();
 
     app.listen(port, () => {
       console.log(
