@@ -142,7 +142,7 @@ dist
 .svelte-kit
 
 # Env
-*.env.development
-*.env.production
+# *.env.development
+# *.env.production
 
 # End of https://www.toptal.com/developers/gitignore/api/node
