@@ -1,4 +1,5 @@
 import TransactionType from "../../DB/Model/TransactionType.js";
+import Category from "../../DB/Model/Category.js";
 import _ from "lodash";
 
 const createTransactionType = async (req, res) => {
@@ -57,14 +58,25 @@ const updateTransactionType = async (req, res) => {
 const deleteTransactionType = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Find and delete the transaction type
     const deletedTransactionType = await TransactionType.findOneAndDelete({
       _id: id,
       userId: req.userId,
     });
+
     if (!deletedTransactionType) {
       return res.status(404).json({ error: "Transaction type not found" });
     }
-    res.status(200).json({ message: "Transaction type deleted successfully" });
+
+    // Delete related categories
+    await Category.deleteMany({ type: id });
+
+    res
+      .status(200)
+      .json({
+        message: "Transaction type and related categories deleted successfully",
+      });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

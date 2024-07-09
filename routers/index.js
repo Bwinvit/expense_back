@@ -5,6 +5,8 @@ import Transaction from "./Transaction/transaction.js";
 import Category from "./Category/Category.js";
 import TransactionType from "./TransactionType/TransactionType.js";
 import Home from "./Home/Home.js";
+import Chart from "./Chart/Chart.js";
+import Bill from "./Bill/Bill.js";
 
 export const Router = {
   User,
@@ -14,4 +16,6 @@ export const Router = {
   Category,
   TransactionType,
   Home,
+  Chart,
+  Bill,
 };

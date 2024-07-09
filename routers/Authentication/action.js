@@ -7,6 +7,7 @@ import fs from "fs";
 import crypto from "crypto";
 
 import User from "../../DB/Model/User.js";
+import Bill from "../../DB/Model/Bill.js";
 
 const env = process.env.NODE_ENV || "development";
 const envFile = `.env.${env}`;
@@ -77,8 +78,20 @@ const getProfile = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+    const upcomingBills = await Bill.find({
+      userId,
+      isPaid: false,
+      dueDate: {
+        $lte: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        $gte: new Date(),
+      },
+    });
+
     const userResponse = user.toObject();
     delete userResponse.password;
+
+    // Add upcoming bills to the user response
+    userResponse.upcomingBills = upcomingBills;
 
     res.status(200).json(userResponse);
   } catch (error) {

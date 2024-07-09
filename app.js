@@ -36,6 +36,8 @@ app.use("/api/transaction", Router.Transaction);
 app.use("/api/category", Router.Category);
 app.use("/api/transaction-type", Router.TransactionType);
 app.use("/api/home", Router.Home);
+app.use("/api/chart", Router.Chart);
+app.use("/api/bill", Router.Bill);
 
 connectDB()
   .then((db) => {
